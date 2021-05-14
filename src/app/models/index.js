@@ -9,9 +9,9 @@ const db = {};
 
 let sequelize;
 
-if (!process.env.DATABASE_URL) {
-  sequelize = new Sequelize(config.database, config.username, config.password, config);
-} else {
+if (!process.env.DATABASE_URL) {  
+  sequelize = new Sequelize(config.database, config.username, config.password, config);  
+} else {  
   sequelize = new Sequelize(process.env.DATABASE_URL, config);
 }
 
