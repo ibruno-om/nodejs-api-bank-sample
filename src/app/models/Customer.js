@@ -54,6 +54,12 @@ module.exports = (sequelize, DataTypes) => {
       validate: {
         notEmpty: true
       }
+    },
+    createdAt: {
+      type: DataTypes.DATE      
+    },
+    updatedAt: {
+      type: DataTypes.DATE
     }
   });
   

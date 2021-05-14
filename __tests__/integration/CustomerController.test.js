@@ -11,7 +11,7 @@ describe('CustomerController : CRUD Operations', () => {
   });
 
   it('should create a customer with valid params', async () => {
-    const validData = {
+    const validData = {      
       name: faker.name.findName(), 
       cpf_cnpj: faker.br.cpf(),
       bank_code: '001',
@@ -26,14 +26,26 @@ describe('CustomerController : CRUD Operations', () => {
 
     const response = await request(app)
       .post("/customer")
-      .send(validData);
-    
+      .send(validData);    
+
+    const { name, cpf_cnpj, 
+      bank_code, email, 
+      agency, agency_digit, 
+      account, account_digit, 
+      account_type, 
+      status } = response.body;
+
     expect(response.status).toBe(200);
+    expect({ name, cpf_cnpj, 
+      bank_code, email, 
+      agency, agency_digit, 
+      account, account_digit, 
+      account_type, 
+      status }).toEqual(validData);
   });
 
   it('should update a customer with valid params and valid id', async () => {
     const customer = await factory.create("Customer");  
-
     const validData = {
       name: faker.name.findName()
     }
@@ -43,6 +55,8 @@ describe('CustomerController : CRUD Operations', () => {
       .send(validData);    
 
     expect(response.status).toBe(200);
+    expect(response.body.id).toEqual(customer.id);
+    expect(response.body.name).toEqual(validData.name);
   });
 
   it('should delete a customer with valid id', async () => {
@@ -53,6 +67,7 @@ describe('CustomerController : CRUD Operations', () => {
       .send();    
 
     expect(response.status).toBe(200);
+    expect(response.body.message).toEqual('Customer with id ' + customer.id + ' has been deleted');
   });
 
   it('should list paginate customers', async () => {
@@ -63,8 +78,10 @@ describe('CustomerController : CRUD Operations', () => {
       .send({
         page: 0
       })
+      
 
-    expect(response.status).toBe(200);    
+    expect(response.status).toBe(200);
+    expect(response.body.length).toBe(customers.length);    
   });
 
   it('should show a customers with valid id', async () => {
@@ -74,7 +91,32 @@ describe('CustomerController : CRUD Operations', () => {
       .get("/customer/" + customer.id)
       .send()
 
+      const { id, name, cpf_cnpj, 
+        bank_code, email, 
+        agency, agency_digit, 
+        account, account_digit, 
+        account_type, 
+        status } = response.body;
+
     expect(response.status).toBe(200);    
+    expect({ id, name, cpf_cnpj, 
+      bank_code, email, 
+      agency, agency_digit, 
+      account, account_digit, 
+      account_type, 
+      status }).toEqual( { 
+        id: customer.id,
+        name: customer.name,
+        cpf_cnpj: customer.cpf_cnpj,
+        bank_code: customer.bank_code,
+        email: customer.email,
+        agency: customer.agency,
+        agency_digit: customer.agency_digit,
+        account: customer.account,
+        account_digit: customer.account_digit,
+        account_type: customer.account_type,
+        status: customer.status,
+      } );
   });
 
 });
