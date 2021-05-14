@@ -11,6 +11,7 @@ module.exports = {
   storage: './__tests__/database.sqlite',
   operatorsAliases: false,
   logging: false,
+  ssl: true,
   define: {
     timestamps: true,
     underscored: true,
