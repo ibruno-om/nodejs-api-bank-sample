@@ -18,7 +18,7 @@ Clone down this repository. You will need `node` and `yarn` installed globally o
 
 `yarn install`  
 
-Set your ENV:
+Set your ENV (use env.sample):
 
 `.env`
 
@@ -38,6 +38,10 @@ Execute Database Migrate
 
 `yarn start`  
 
-To Visit App:
+To Visit App (local):
 
 `localhost:3000/customers`  
+
+To Visti App (online)
+
+`https://nodejs-api-bank-sample.herokuapp.com/customer`
