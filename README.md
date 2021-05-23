@@ -49,7 +49,3 @@ To Visti App (online)
 React View Project
 
 `https://github.com/ibruno-om/reactjs-view-api-bank-sample`
-
-Online View Client
-
-`https://reactjs-view-api-bank-sample.herokuapp.com/`
